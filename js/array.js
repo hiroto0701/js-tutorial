@@ -17,25 +17,50 @@
 
 
 /* Array.prototype.at() */
-// at() は Array インスタンスのメソッドで、整数値を受け取り、その位置にある項目を返します。正の整数値と負の整数値が使用できます。
-// 負の整数は、配列の最後の項目から前へ数えます。
-const arrayAt = [1, 3, 5, 7, 9, 11];
-let indexAt = 2;
+// // at() は Array インスタンスのメソッドで、整数値を受け取り、その位置にある項目を返します。正の整数値と負の整数値が使用できます。
+// // 負の整数は、配列の最後の項目から前へ数えます。
+// const arrayAt = [1, 3, 5, 7, 9, 11];
+// let indexAt = 2;
 
-console.log(`An index of ${indexAt} returns ${arrayAt.at(indexAt)}`); // An index of 2 returns 5
+// console.log(`An index of ${indexAt} returns ${arrayAt.at(indexAt)}`); // An index of 2 returns 5
 
-indexAt = -2;
-console.log(`An index of ${indexAt} returns ${arrayAt.at(indexAt)}`); // An index of 2 returns 9
+// indexAt = -2;
+// console.log(`An index of ${indexAt} returns ${arrayAt.at(indexAt)}`); // An index of 2 returns 9
 
-// 配列の末尾を返す例
-const fruits = ['りんご', 'みかん', 'ぶどう'];
-function returnLast(arr) {
-  return arr.at(-1);
-}
+// // 配列の末尾を返す例
+// const fruits = ['りんご', 'みかん', 'ぶどう'];
+// function returnLast(arr) {
+//   return arr.at(-1);
+// }
 
-const lastItem1 = returnLast(fruits);
-console.log(lastItem1);  // ぶどう
+// const lastItem1 = returnLast(fruits);
+// console.log(lastItem1);  // ぶどう
 
-fruits.push('バナナ');
-const lastItem2 = returnLast(fruits); // バナナ
-console.log(lastItem2);
+// fruits.push('バナナ');
+// const lastItem2 = returnLast(fruits); // バナナ
+// console.log(lastItem2);
+
+
+/* Array.prototype.concat() */
+// concat() は Array インスタンスのメソッドで、2 つ以上の配列を結合するために使用します。
+// このメソッドは既存の配列を変更せず、新しい配列を返します。
+const arr1 = [1, 2, 3, 4, 5];
+const arr2 = ["a", "b", "c", "d"];
+const arr3 = arr1.concat(arr2);
+const arr4 = arr1.concat(); // 引数の省略も可能。省略したら既存の配列のシャロ―コピーを返す。
+
+console.log(arr3);  // [1, 2, 3, 4, 5, "a", "b", "c", "d"]
+console.log(arr4);  // [1, 2, 3, 4, 5]
+
+// 配列同士の結合だけでなく、配列に対して値を追加することもできる
+const arr5 = arr1.concat(100);
+console.log(arr5);
+
+// ネストした配列の連結も可能
+const num1 = [[1, 3]];
+const num2 = [2, [4]];
+const numbers = num1.concat(num2);
+console.log(numbers); // [[1, 3], 2, [4]]  そのまま連結される
+
+// 疎配列の場合もそのまま連結される
+console.log(([1, , 3]).concat([4, 5])); // [1, empty, 3, 4, 5]
