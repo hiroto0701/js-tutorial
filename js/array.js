@@ -131,19 +131,55 @@
 
 
 /* Array.prototype.fill() 破壊的メソッド */
-// インデックスの範囲内にある配列のすべての要素を一定の値に変更します。これは変更した配列を返します。
+// // インデックスの範囲内にある配列のすべての要素を一定の値に変更します。これは変更した配列を返します。
+// /*
+//   syntax
+//   fill(value)
+//   fill(value, start)
+//   fill(value, start, end)
+// */
+// const arr = [1, 2, 3, 4];
+// console.log(arr.fill(0, 2, 4)); // [1, 2, 0, 0]
+// console.log(arr); // [1, 2, 0, 0]
+
+// console.log(arr.fill(1, 0));  // [1,1,1,1]
+// console.log(arr);  // [1,1,1,1]
+
+// console.log(arr.fill(9999));  // [9999, 9999, 9999, 9999]
+// console.log(arr); // [9999, 9999, 9999, 9999]
+
+
+
+/* Array.prototype.filter() 非破壊メソッド */
+// 指定された配列の中から指定された関数で実装されているテストに合格した要素だけを抽出したシャローコピーを作成します。
+// filter() メソッドは反復処理メソッドです。
+// 指定された callbackFn 関数を配列の各要素に対して一度ずつ呼び出し、 callbackFn が真値を返したすべての要素からなる新しい配列を生成します。 
+// callbackFn は値が代入されている配列の添字に対してのみ呼び出されます。
 /*
   syntax
-  fill(value)
-  fill(value, start)
-  fill(value, start, end)
+  filter(callbackFn)
+  filter(callbackFn, thisArg)
 */
-const arr = [1, 2, 3, 4];
-console.log(arr.fill(0, 2, 4)); // [1, 2, 0, 0]
-console.log(arr); // [1, 2, 0, 0]
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const result = numbers.filter((num) => num % 2 ===0);
+console.log(result);  // [2, 4, 6, 8]
 
-console.log(arr.fill(1, 0));  // [1,1,1,1]
-console.log(arr);  // [1,1,1,1]
+// 10未満の数値を取り除く
+function isBigEnough(value) {
+  return value >= 10;
+}
 
-console.log(arr.fill(9999));  // [9999, 9999, 9999, 9999]
-console.log(arr); // [9999, 9999, 9999, 9999]
+const filtered = [12, 5, 8, 130, 44].filter(isBigEnough); // [12, 130, 44]
+
+// 配列内の検索
+const fruits = ["apple", "banana", "grapes", "mango", "orange"];
+
+/**
+ * Filter array items based on search criteria (query)
+ */
+function filterItems(arr, query) {
+  return arr.filter((el) => el.toLowerCase().includes(query.toLowerCase()));
+}
+
+console.log(filterItems(fruits, "ap")); // ['apple', 'grapes']
+console.log(filterItems(fruits, "an")); // ['banana', 'mango', 'orange']
