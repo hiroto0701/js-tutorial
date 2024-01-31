@@ -16,7 +16,7 @@
 // 特に、カスタムのイテレータを定義したい場合には、Symbol.iterator を使用して @@iterator を実装します
 
 
-/* Array.prototype.at() */
+/* Array.prototype.at() 非破壊メソッド */
 // // at() は Array インスタンスのメソッドで、整数値を受け取り、その位置にある項目を返します。正の整数値と負の整数値が使用できます。
 // // 負の整数は、配列の最後の項目から前へ数えます。
 // const arrayAt = [1, 3, 5, 7, 9, 11];
@@ -41,26 +41,39 @@
 // console.log(lastItem2);
 
 
-/* Array.prototype.concat() */
-// concat() は Array インスタンスのメソッドで、2 つ以上の配列を結合するために使用します。
-// このメソッドは既存の配列を変更せず、新しい配列を返します。
-const arr1 = [1, 2, 3, 4, 5];
-const arr2 = ["a", "b", "c", "d"];
-const arr3 = arr1.concat(arr2);
-const arr4 = arr1.concat(); // 引数の省略も可能。省略したら既存の配列のシャロ―コピーを返す。
+/* Array.prototype.concat() 非破壊メソッド */
+// // concat() は Array インスタンスのメソッドで、2 つ以上の配列を結合するために使用します。
+// // このメソッドは既存の配列を変更せず、新しい配列を返します。
+// const arr1 = [1, 2, 3, 4, 5];
+// const arr2 = ["a", "b", "c", "d"];
+// const arr3 = arr1.concat(arr2);
+// const arr4 = arr1.concat(); // 引数の省略も可能。省略したら既存の配列のシャロ―コピーを返す。
 
-console.log(arr3);  // [1, 2, 3, 4, 5, "a", "b", "c", "d"]
-console.log(arr4);  // [1, 2, 3, 4, 5]
+// console.log(arr3);  // [1, 2, 3, 4, 5, "a", "b", "c", "d"]
+// console.log(arr4);  // [1, 2, 3, 4, 5]
 
-// 配列同士の結合だけでなく、配列に対して値を追加することもできる
-const arr5 = arr1.concat(100);
-console.log(arr5);
+// // 配列同士の結合だけでなく、配列に対して値を追加することもできる
+// const arr5 = arr1.concat(100);
+// console.log(arr5);
 
-// ネストした配列の連結も可能
-const num1 = [[1, 3]];
-const num2 = [2, [4]];
-const numbers = num1.concat(num2);
-console.log(numbers); // [[1, 3], 2, [4]]  そのまま連結される
+// // ネストした配列の連結も可能
+// const num1 = [[1, 3]];
+// const num2 = [2, [4]];
+// const numbers = num1.concat(num2);
+// console.log(numbers); // [[1, 3], 2, [4]]  そのまま連結される
 
-// 疎配列の場合もそのまま連結される
-console.log(([1, , 3]).concat([4, 5])); // [1, empty, 3, 4, 5]
+// // 疎配列の場合もそのまま連結される
+// console.log(([1, , 3]).concat([4, 5])); // [1, empty, 3, 4, 5]
+
+
+/* Array.prototype.copyWithin() 破壊的メソッド */
+/*  
+  syntax
+  copyWithin(target, start)
+  copyWithin(target, start, end)  
+*/
+// この配列の一部を配列内の他の場所にシャローコピーし、この配列を長さを変更せずに返します。
+const arr1 = ["a", "b", "c", "d", "e"];
+// 3番目の要素から4番目までを0番目にコピー
+console.log(arr1.copyWithin(0, 3, 4));  // ["d", "e", "c", "d", "e"]
+console.log(arr1);  // 破壊的メソッドなので元の配列も変わる
