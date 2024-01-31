@@ -108,22 +108,42 @@
 
 
 /* Array.prototype.every() 非破壊メソッド */
-// 列内のすべての要素が指定された関数で実装されたテストに合格するかどうかをテストします。これは論理値を返します
+// // 列内のすべての要素が指定された関数で実装されたテストに合格するかどうかをテストします。これは論理値を返します
+// /*
+//   syntax
+//   every(callbackFn)
+//   every(callbackFn, thisArg)
+// */
+// const isBelowThreshold = (currentValue) => currentValue < 40;
+
+// const array1 = [1, 30, 39, 29, 10, 13];
+
+// console.log(array1.every(isBelowThreshold));  // true
+
+// // 全ての配列要素の大きさをテストする
+// const arr = [1, 10, 100, 1000, 10000];
+// console.log(arr.every((elem) => elem >= 10));  // false
+
+// // 疎配列に対してはスルーされる
+// console.log([1, , 3].every((x) => x !== undefined)); // true
+// console.log([2, , 2].every((x) => x === 2)); // true
+
+
+
+/* Array.prototype.fill() 破壊的メソッド */
+// インデックスの範囲内にある配列のすべての要素を一定の値に変更します。これは変更した配列を返します。
 /*
   syntax
-  every(callbackFn)
-  every(callbackFn, thisArg)
+  fill(value)
+  fill(value, start)
+  fill(value, start, end)
 */
-const isBelowThreshold = (currentValue) => currentValue < 40;
+const arr = [1, 2, 3, 4];
+console.log(arr.fill(0, 2, 4)); // [1, 2, 0, 0]
+console.log(arr); // [1, 2, 0, 0]
 
-const array1 = [1, 30, 39, 29, 10, 13];
+console.log(arr.fill(1, 0));  // [1,1,1,1]
+console.log(arr);  // [1,1,1,1]
 
-console.log(array1.every(isBelowThreshold));  // true
-
-// 全ての配列要素の大きさをテストする
-const arr = [1, 10, 100, 1000, 10000];
-console.log(arr.every((elem) => elem >= 10));  // false
-
-// 疎配列に対してはスルーされる
-console.log([1, , 3].every((x) => x !== undefined)); // true
-console.log([2, , 2].every((x) => x === 2)); // true
+console.log(arr.fill(9999));  // [9999, 9999, 9999, 9999]
+console.log(arr); // [9999, 9999, 9999, 9999]
