@@ -67,13 +67,41 @@
 
 
 /* Array.prototype.copyWithin() 破壊的メソッド */
-/*  
+// /*  
+//   syntax
+//   copyWithin(target, start)
+//   copyWithin(target, start, end)  
+// */
+// // この配列の一部を配列内の他の場所にシャローコピーし、この配列を長さを変更せずに返します。
+// const arr1 = ["a", "b", "c", "d", "e"];
+// // 3番目の要素から4番目までを0番目にコピー
+// console.log(arr1.copyWithin(0, 3, 4));  // ["d", "e", "c", "d", "e"]
+// console.log(arr1);  // 破壊的メソッドなので元の配列も変わる
+
+
+
+/* Array.prototype.entries() 非破壊メソッド */
+// 配列内の各要素に対するキー/値のペアを含む新しい配列イテレーターオブジェクトを返します。
+/*
   syntax
-  copyWithin(target, start)
-  copyWithin(target, start, end)  
+  entries()  引数なし
 */
-// この配列の一部を配列内の他の場所にシャローコピーし、この配列を長さを変更せずに返します。
-const arr1 = ["a", "b", "c", "d", "e"];
-// 3番目の要素から4番目までを0番目にコピー
-console.log(arr1.copyWithin(0, 3, 4));  // ["d", "e", "c", "d", "e"]
-console.log(arr1);  // 破壊的メソッドなので元の配列も変わる
+const arr1 = ["a", "b", "c"];
+const iterator1 = arr1.entries();
+console.log(iterator1.next().value);  // [0, "a"]
+console.log(iterator1.next().value);  // [1, "b"]
+
+const a = ["a", "b", "c"];
+
+for (const [index, element] of a.entries()) {
+  console.log(index, element);
+}
+// 0 'a'
+// 1 'b'
+// 2 'c'
+
+for (const element of [, "a"].entries()) {
+  console.log(element);
+}
+// [0, undefined]
+// [1, 'a']
