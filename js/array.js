@@ -82,26 +82,48 @@
 
 /* Array.prototype.entries() 非破壊メソッド */
 // 配列内の各要素に対するキー/値のペアを含む新しい配列イテレーターオブジェクトを返します。
+// /*
+//   syntax
+//   entries()  引数なし
+// */
+// const arr1 = ["a", "b", "c"];
+// const iterator1 = arr1.entries();
+// console.log(iterator1.next().value);  // [0, "a"]
+// console.log(iterator1.next().value);  // [1, "b"]
+
+// const a = ["a", "b", "c"];
+
+// for (const [index, element] of a.entries()) {
+//   console.log(index, element);
+// }
+// // 0 'a'
+// // 1 'b'
+// // 2 'c'
+
+// for (const element of [, "a"].entries()) {
+//   console.log(element);
+// }
+// // [0, undefined]
+// // [1, 'a']
+
+
+/* Array.prototype.every() 非破壊メソッド */
+// 列内のすべての要素が指定された関数で実装されたテストに合格するかどうかをテストします。これは論理値を返します
 /*
   syntax
-  entries()  引数なし
+  every(callbackFn)
+  every(callbackFn, thisArg)
 */
-const arr1 = ["a", "b", "c"];
-const iterator1 = arr1.entries();
-console.log(iterator1.next().value);  // [0, "a"]
-console.log(iterator1.next().value);  // [1, "b"]
+const isBelowThreshold = (currentValue) => currentValue < 40;
 
-const a = ["a", "b", "c"];
+const array1 = [1, 30, 39, 29, 10, 13];
 
-for (const [index, element] of a.entries()) {
-  console.log(index, element);
-}
-// 0 'a'
-// 1 'b'
-// 2 'c'
+console.log(array1.every(isBelowThreshold));  // true
 
-for (const element of [, "a"].entries()) {
-  console.log(element);
-}
-// [0, undefined]
-// [1, 'a']
+// 全ての配列要素の大きさをテストする
+const arr = [1, 10, 100, 1000, 10000];
+console.log(arr.every((elem) => elem >= 10));  // false
+
+// 疎配列に対してはスルーされる
+console.log([1, , 3].every((x) => x !== undefined)); // true
+console.log([2, , 2].every((x) => x === 2)); // true
