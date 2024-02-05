@@ -71,3 +71,8 @@ for (let i in arr) {
 for (let i of arr) {
   console.log(i); // 3, 5, 7 が出力される
 }
+// forEachでも同じように記述可能
+arr.forEach(elem => console.log(elem));
+
+// mapでも同じように記述できるが、mapは新しい配列を生成する。
+arr.map(elem => console.log(elem));
