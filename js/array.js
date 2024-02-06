@@ -151,35 +151,68 @@
 
 
 /* Array.prototype.filter() 非破壊メソッド */
-// 指定された配列の中から指定された関数で実装されているテストに合格した要素だけを抽出したシャローコピーを作成します。
-// filter() メソッドは反復処理メソッドです。
-// 指定された callbackFn 関数を配列の各要素に対して一度ずつ呼び出し、 callbackFn が真値を返したすべての要素からなる新しい配列を生成します。 
-// callbackFn は値が代入されている配列の添字に対してのみ呼び出されます。
+// // 指定された配列の中から指定された関数で実装されているテストに合格した要素だけを抽出したシャローコピーを作成します。
+// // filter() メソッドは反復処理メソッドです。
+// // 指定された callbackFn 関数を配列の各要素に対して一度ずつ呼び出し、 callbackFn が真値を返したすべての要素からなる新しい配列を生成します。 
+// // callbackFn は値が代入されている配列の添字に対してのみ呼び出されます。
+// /*
+//   syntax
+//   filter(callbackFn)
+//   filter(callbackFn, thisArg)
+// */
+// const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// const result = numbers.filter((num) => num % 2 ===0);
+// console.log(result);  // [2, 4, 6, 8]
+
+// // 10未満の数値を取り除く
+// function isBigEnough(value) {
+//   return value >= 10;
+// }
+
+// const filtered = [12, 5, 8, 130, 44].filter(isBigEnough); // [12, 130, 44]
+
+// // 配列内の検索
+// const fruits = ["apple", "banana", "grapes", "mango", "orange"];
+
+// /**
+//  * Filter array items based on search criteria (query)
+//  */
+// function filterItems(arr, query) {
+//   return arr.filter((el) => el.toLowerCase().includes(query.toLowerCase()));
+// }
+
+// console.log(filterItems(fruits, "ap")); // ['apple', 'grapes']
+// console.log(filterItems(fruits, "an")); // ['banana', 'mango', 'orange']
+
+
+/* Array.prototype.find() 非破壊メソッド */
+// 提供されたテスト関数を満たす配列内の最初の要素を返します。 テスト関数を満たす値がない場合は、 undefined を返します。
+// ・配列内で見つかった要素のインデックスが必要な場合は、findIndex() を使用してください。
+// ・値のインデックスを検索する必要がある場合は、indexOf() を使用してください。(findIndex() と似ていますが、それぞれの要素の等価性はテスト関数ではなく値でチェックします。)
+// ・配列内に値が存在するかどうかを調べる必要がある場合は、 includes() を使用してください。
+// ・指定したテスト関数を満たす要素があるかどうかを調べる必要がある場合は、 some() を使用してください。
 /*
   syntax
-  filter(callbackFn)
-  filter(callbackFn, thisArg)
+  find(callbackFn)
+  find(callbackFn, thisArg)
 */
-const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const result = numbers.filter((num) => num % 2 ===0);
-console.log(result);  // [2, 4, 6, 8]
+const arr = [1, 3, 5, 7, 9, 11];
+const found = arr.find(elem => elem % 2 === 0);
+console.log(found); // undefined
 
-// 10未満の数値を取り除く
-function isBigEnough(value) {
-  return value >= 10;
+// 配列内のオブジェクトをプロパティの一つで検索
+const inventory = [
+  { name: "apples", quantity: 2 },
+  { name: "bananas", quantity: 0 },
+  { name: "grapes", quantity: 5 },
+];
+
+function isGrapes(fruit) {
+  return fruit.name === "grapes";
 }
 
-const filtered = [12, 5, 8, 130, 44].filter(isBigEnough); // [12, 130, 44]
+console.log(inventory.find(isGrapes));  // { name: 'grapes', quantity: 5 }
 
-// 配列内の検索
-const fruits = ["apple", "banana", "grapes", "mango", "orange"];
-
-/**
- * Filter array items based on search criteria (query)
- */
-function filterItems(arr, query) {
-  return arr.filter((el) => el.toLowerCase().includes(query.toLowerCase()));
-}
-
-console.log(filterItems(fruits, "ap")); // ['apple', 'grapes']
-console.log(filterItems(fruits, "an")); // ['banana', 'mango', 'orange']
+// 分割代入とアロー巻子を使用してより簡単に
+const result = inventory.find(({ name }) => name === "grapes");
+console.log(result);  // { name: 'grapes', quantity: 5 }
