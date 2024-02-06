@@ -238,23 +238,37 @@
   flat()
   flat(depth)
 */
-// ネストされた配列の平坦化
-const arr1 = [1, 2, [3, 4]];
-console.log(arr1.flat()); // [ 1, 2, 3, 4 ]
+// // ネストされた配列の平坦化
+// const arr1 = [1, 2, [3, 4]];
+// console.log(arr1.flat()); // [ 1, 2, 3, 4 ]
 
-const arr2 = [
-  1, 2,
-  [
-    3, 4,
-    [
-      5, 6
-    ]
-  ]
-];
-console.log(arr2.flat()); // [ 1, 2, 3, 4, [ 5, 6 ] ]
+// const arr2 = [
+//   1, 2,
+//   [
+//     3, 4,
+//     [
+//       5, 6
+//     ]
+//   ]
+// ];
+// console.log(arr2.flat()); // [ 1, 2, 3, 4, [ 5, 6 ] ]
 
-const arr3 = [1, 2, [3, 4, [5, 6]]];
-console.log(arr3.flat(2));  // [ 1, 2, 3, 4, 5, 6 ]
+// const arr3 = [1, 2, [3, 4, [5, 6]]];
+// console.log(arr3.flat(2));  // [ 1, 2, 3, 4, 5, 6 ]
 
-const arr4 = [1, 2, [3, 4, [5, , [7, 8, [9, 10]]]]];
-console.log(arr4.flat(Infinity));  // [1, 2, 3, 4, 5, 7, 8, 9, 10]
+// const arr4 = [1, 2, [3, 4, [5, , [7, 8, [9, 10]]]]];
+// console.log(arr4.flat(Infinity));  // [1, 2, 3, 4, 5, 7, 8, 9, 10]
+
+/* Array.prototype.from() 非破壊メソッド */
+// Array.from() 静的メソッドは、反復可能オブジェクトや配列風オブジェクトからシャローコピーされた、新しい Array インスタンスを生成します。
+/*
+  syntax
+ Array.from(arrayLike)
+  Array.from(arrayLike, mapFn)
+  Array.from(arrayLike, mapFn, thisArg)
+*/
+console.log(Array.from('foo'));
+// Expected output: Array ["f", "o", "o"]
+
+console.log(Array.from([1, 2, 3], (x) => x * 2));
+// Expected output: Array [2, 4, 6]
