@@ -151,35 +151,124 @@
 
 
 /* Array.prototype.filter() 非破壊メソッド */
-// 指定された配列の中から指定された関数で実装されているテストに合格した要素だけを抽出したシャローコピーを作成します。
-// filter() メソッドは反復処理メソッドです。
-// 指定された callbackFn 関数を配列の各要素に対して一度ずつ呼び出し、 callbackFn が真値を返したすべての要素からなる新しい配列を生成します。 
-// callbackFn は値が代入されている配列の添字に対してのみ呼び出されます。
+// // 指定された配列の中から指定された関数で実装されているテストに合格した要素だけを抽出したシャローコピーを作成します。
+// // filter() メソッドは反復処理メソッドです。
+// // 指定された callbackFn 関数を配列の各要素に対して一度ずつ呼び出し、 callbackFn が真値を返したすべての要素からなる新しい配列を生成します。 
+// // callbackFn は値が代入されている配列の添字に対してのみ呼び出されます。
+// /*
+//   syntax
+//   filter(callbackFn)
+//   filter(callbackFn, thisArg)
+// */
+// const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// const result = numbers.filter((num) => num % 2 ===0);
+// console.log(result);  // [2, 4, 6, 8]
+
+// // 10未満の数値を取り除く
+// function isBigEnough(value) {
+//   return value >= 10;
+// }
+
+// const filtered = [12, 5, 8, 130, 44].filter(isBigEnough); // [12, 130, 44]
+
+// // 配列内の検索
+// const fruits = ["apple", "banana", "grapes", "mango", "orange"];
+
+// /**
+//  * Filter array items based on search criteria (query)
+//  */
+// function filterItems(arr, query) {
+//   return arr.filter((el) => el.toLowerCase().includes(query.toLowerCase()));
+// }
+
+// console.log(filterItems(fruits, "ap")); // ['apple', 'grapes']
+// console.log(filterItems(fruits, "an")); // ['banana', 'mango', 'orange']
+
+
+/* Array.prototype.find() 非破壊メソッド */
+// // 提供されたテスト関数を満たす配列内の最初の要素を返します。 テスト関数を満たす値がない場合は、 undefined を返します。
+// // ・配列内で見つかった要素のインデックスが必要な場合は、findIndex() を使用してください。
+// // ・値のインデックスを検索する必要がある場合は、indexOf() を使用してください。(findIndex() と似ていますが、それぞれの要素の等価性はテスト関数ではなく値でチェックします。)
+// // ・配列内に値が存在するかどうかを調べる必要がある場合は、 includes() を使用してください。
+// // ・指定したテスト関数を満たす要素があるかどうかを調べる必要がある場合は、 some() を使用してください。
+// /*
+//   syntax
+//   find(callbackFn)
+//   find(callbackFn, thisArg)
+// */
+// const arr = [1, 3, 5, 7, 9, 11];
+// const found = arr.find(elem => elem % 2 === 0);
+// console.log(found); // undefined
+
+// // 配列内のオブジェクトをプロパティの一つで検索
+// const inventory = [
+//   { name: "apples", quantity: 2 },
+//   { name: "bananas", quantity: 0 },
+//   { name: "grapes", quantity: 5 },
+// ];
+
+// function isGrapes(fruit) {
+//   return fruit.name === "grapes";
+// }
+
+// console.log(inventory.find(isGrapes));  // { name: 'grapes', quantity: 5 }
+
+// // 分割代入とアロー巻子を使用してより簡単に
+// const result = inventory.find(({ name }) => name === "grapes");
+// console.log(result);  // { name: 'grapes', quantity: 5 }
+
+
+/* Array.prototype.findIndex() 非破壊メソッド */
+// // 配列内の指定されたテスト関数に合格する最初の要素のインデックスを返します。 テスト関数に合格する要素がなかった場合は -1 を返します。
+// // find() メソッドも参照してください。こちらのメソッドは、配列内で見つかった要素の位置ではなく、値を返します
+// /*
+//   syntax
+//   findIndex(callbackFn)
+//   findIndex(callbackFn, thisArg)  
+// */
+// const arr = [5, 12, 8, 130, 44];
+// const isLargeNumber = e => e > 13;
+// console.log(arr.findIndex(isLargeNumber));  // 3
+
+
+/* Array.prototype.flat() 非破壊メソッド */
+// すべてのサブ配列の要素を指定した深さで再帰的に結合した新しい配列を生成します。
 /*
   syntax
-  filter(callbackFn)
-  filter(callbackFn, thisArg)
+  flat()
+  flat(depth)
 */
-const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const result = numbers.filter((num) => num % 2 ===0);
-console.log(result);  // [2, 4, 6, 8]
+// // ネストされた配列の平坦化
+// const arr1 = [1, 2, [3, 4]];
+// console.log(arr1.flat()); // [ 1, 2, 3, 4 ]
 
-// 10未満の数値を取り除く
-function isBigEnough(value) {
-  return value >= 10;
-}
+// const arr2 = [
+//   1, 2,
+//   [
+//     3, 4,
+//     [
+//       5, 6
+//     ]
+//   ]
+// ];
+// console.log(arr2.flat()); // [ 1, 2, 3, 4, [ 5, 6 ] ]
 
-const filtered = [12, 5, 8, 130, 44].filter(isBigEnough); // [12, 130, 44]
+// const arr3 = [1, 2, [3, 4, [5, 6]]];
+// console.log(arr3.flat(2));  // [ 1, 2, 3, 4, 5, 6 ]
 
-// 配列内の検索
-const fruits = ["apple", "banana", "grapes", "mango", "orange"];
+// const arr4 = [1, 2, [3, 4, [5, , [7, 8, [9, 10]]]]];
+// console.log(arr4.flat(Infinity));  // [1, 2, 3, 4, 5, 7, 8, 9, 10]
 
-/**
- * Filter array items based on search criteria (query)
- */
-function filterItems(arr, query) {
-  return arr.filter((el) => el.toLowerCase().includes(query.toLowerCase()));
-}
+/* Array.prototype.from() 非破壊メソッド */
+// Array.from() 静的メソッドは、反復可能オブジェクトや配列風オブジェクトからシャローコピーされた、新しい Array インスタンスを生成します。
+/*
+  syntax
+ Array.from(arrayLike)
+  Array.from(arrayLike, mapFn)
+  Array.from(arrayLike, mapFn, thisArg)
+*/
+console.log(Array.from('foo'));
+// Expected output: Array ["f", "o", "o"]
 
-console.log(filterItems(fruits, "ap")); // ['apple', 'grapes']
-console.log(filterItems(fruits, "an")); // ['banana', 'mango', 'orange']
+console.log(Array.from([1, 2, 3], (x) => x * 2));
+// Expected output: Array [2, 4, 6]
