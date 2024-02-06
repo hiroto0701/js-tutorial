@@ -186,33 +186,46 @@
 
 
 /* Array.prototype.find() 非破壊メソッド */
-// 提供されたテスト関数を満たす配列内の最初の要素を返します。 テスト関数を満たす値がない場合は、 undefined を返します。
-// ・配列内で見つかった要素のインデックスが必要な場合は、findIndex() を使用してください。
-// ・値のインデックスを検索する必要がある場合は、indexOf() を使用してください。(findIndex() と似ていますが、それぞれの要素の等価性はテスト関数ではなく値でチェックします。)
-// ・配列内に値が存在するかどうかを調べる必要がある場合は、 includes() を使用してください。
-// ・指定したテスト関数を満たす要素があるかどうかを調べる必要がある場合は、 some() を使用してください。
+// // 提供されたテスト関数を満たす配列内の最初の要素を返します。 テスト関数を満たす値がない場合は、 undefined を返します。
+// // ・配列内で見つかった要素のインデックスが必要な場合は、findIndex() を使用してください。
+// // ・値のインデックスを検索する必要がある場合は、indexOf() を使用してください。(findIndex() と似ていますが、それぞれの要素の等価性はテスト関数ではなく値でチェックします。)
+// // ・配列内に値が存在するかどうかを調べる必要がある場合は、 includes() を使用してください。
+// // ・指定したテスト関数を満たす要素があるかどうかを調べる必要がある場合は、 some() を使用してください。
+// /*
+//   syntax
+//   find(callbackFn)
+//   find(callbackFn, thisArg)
+// */
+// const arr = [1, 3, 5, 7, 9, 11];
+// const found = arr.find(elem => elem % 2 === 0);
+// console.log(found); // undefined
+
+// // 配列内のオブジェクトをプロパティの一つで検索
+// const inventory = [
+//   { name: "apples", quantity: 2 },
+//   { name: "bananas", quantity: 0 },
+//   { name: "grapes", quantity: 5 },
+// ];
+
+// function isGrapes(fruit) {
+//   return fruit.name === "grapes";
+// }
+
+// console.log(inventory.find(isGrapes));  // { name: 'grapes', quantity: 5 }
+
+// // 分割代入とアロー巻子を使用してより簡単に
+// const result = inventory.find(({ name }) => name === "grapes");
+// console.log(result);  // { name: 'grapes', quantity: 5 }
+
+
+/* Array.prototype.findIndex() 非破壊メソッド */
+// 配列内の指定されたテスト関数に合格する最初の要素のインデックスを返します。 テスト関数に合格する要素がなかった場合は -1 を返します。
+// find() メソッドも参照してください。こちらのメソッドは、配列内で見つかった要素の位置ではなく、値を返します
 /*
   syntax
-  find(callbackFn)
-  find(callbackFn, thisArg)
+  findIndex(callbackFn)
+  findIndex(callbackFn, thisArg)  
 */
-const arr = [1, 3, 5, 7, 9, 11];
-const found = arr.find(elem => elem % 2 === 0);
-console.log(found); // undefined
-
-// 配列内のオブジェクトをプロパティの一つで検索
-const inventory = [
-  { name: "apples", quantity: 2 },
-  { name: "bananas", quantity: 0 },
-  { name: "grapes", quantity: 5 },
-];
-
-function isGrapes(fruit) {
-  return fruit.name === "grapes";
-}
-
-console.log(inventory.find(isGrapes));  // { name: 'grapes', quantity: 5 }
-
-// 分割代入とアロー巻子を使用してより簡単に
-const result = inventory.find(({ name }) => name === "grapes");
-console.log(result);  // { name: 'grapes', quantity: 5 }
+const arr = [5, 12, 8, 130, 44];
+const isLargeNumber = e => e > 13;
+console.log(arr.findIndex(isLargeNumber));  // 3
