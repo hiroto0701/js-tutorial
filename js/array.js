@@ -219,13 +219,42 @@
 
 
 /* Array.prototype.findIndex() 非破壊メソッド */
-// 配列内の指定されたテスト関数に合格する最初の要素のインデックスを返します。 テスト関数に合格する要素がなかった場合は -1 を返します。
-// find() メソッドも参照してください。こちらのメソッドは、配列内で見つかった要素の位置ではなく、値を返します
+// // 配列内の指定されたテスト関数に合格する最初の要素のインデックスを返します。 テスト関数に合格する要素がなかった場合は -1 を返します。
+// // find() メソッドも参照してください。こちらのメソッドは、配列内で見つかった要素の位置ではなく、値を返します
+// /*
+//   syntax
+//   findIndex(callbackFn)
+//   findIndex(callbackFn, thisArg)  
+// */
+// const arr = [5, 12, 8, 130, 44];
+// const isLargeNumber = e => e > 13;
+// console.log(arr.findIndex(isLargeNumber));  // 3
+
+
+/* Array.prototype.flat() 非破壊メソッド */
+// すべてのサブ配列の要素を指定した深さで再帰的に結合した新しい配列を生成します。
 /*
   syntax
-  findIndex(callbackFn)
-  findIndex(callbackFn, thisArg)  
+  flat()
+  flat(depth)
 */
-const arr = [5, 12, 8, 130, 44];
-const isLargeNumber = e => e > 13;
-console.log(arr.findIndex(isLargeNumber));  // 3
+// ネストされた配列の平坦化
+const arr1 = [1, 2, [3, 4]];
+console.log(arr1.flat()); // [ 1, 2, 3, 4 ]
+
+const arr2 = [
+  1, 2,
+  [
+    3, 4,
+    [
+      5, 6
+    ]
+  ]
+];
+console.log(arr2.flat()); // [ 1, 2, 3, 4, [ 5, 6 ] ]
+
+const arr3 = [1, 2, [3, 4, [5, 6]]];
+console.log(arr3.flat(2));  // [ 1, 2, 3, 4, 5, 6 ]
+
+const arr4 = [1, 2, [3, 4, [5, , [7, 8, [9, 10]]]]];
+console.log(arr4.flat(Infinity));  // [1, 2, 3, 4, 5, 7, 8, 9, 10]
