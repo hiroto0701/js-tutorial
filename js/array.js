@@ -259,16 +259,63 @@
 // const arr4 = [1, 2, [3, 4, [5, , [7, 8, [9, 10]]]]];
 // console.log(arr4.flat(Infinity));  // [1, 2, 3, 4, 5, 7, 8, 9, 10]
 
-/* Array.prototype.from() 非破壊メソッド */
-// Array.from() 静的メソッドは、反復可能オブジェクトや配列風オブジェクトからシャローコピーされた、新しい Array インスタンスを生成します。
+// /* Array.prototype.from() 非破壊メソッド */
+// // Array.from() 静的メソッドは、反復可能オブジェクトや配列風オブジェクトからシャローコピーされた、新しい Array インスタンスを生成します。
+// /*
+//   syntax
+//  Array.from(arrayLike)
+//   Array.from(arrayLike, mapFn)
+//   Array.from(arrayLike, mapFn, thisArg)
+// */
+// console.log(Array.from('foo'));
+// // Expected output: Array ["f", "o", "o"]
+
+// console.log(Array.from([1, 2, 3], (x) => x * 2));
+// // Expected output: Array [2, 4, 6]
+
+// // 例
+// // 文字列から配列の生成
+// console.log(Array.from('inagaki')); // [  'i', 'n', 'a', 'g', 'a', 'k', 'i']
+
+// // Setから配列の生成
+// const set = new Set(["foo", "bar", "baz", "foo"]);
+// console.log(Array.from(set)); // [ 'foo', 'bar', 'baz' ]
+
+
+/* Array.prototype.includes() 非破壊メソッド */
+// includes() は Array インスタンスのメソッドで、特定の要素が配列に含まれているかどうかを true または false で返します。
+ /*
+  syntax
+  includes(searchElement)
+  includes(searchElement, fromIndex)
+*/
+// console.log([1 , 2, 3].includes(2));  // true
+// console.log([1 , 2, 3].includes(4));  // false
+// console.log([1 , 2, "3"].includes(3));  // false
+// console.log([1 , 2, 3, 4, 5, 6].includes(3, 4));  // false（検索開始位置がインデックス番号4の要素からだから）
+
+
+/* Array.prototype.indexof() 非破壊メソッド */
+// indexOf() は Array インスタンスのメソッドで、引数に与えられた内容と同じ内容を持つ最初の配列要素の添字を返します。存在しない場合は -1 を返します
 /*
   syntax
- Array.from(arrayLike)
-  Array.from(arrayLike, mapFn)
-  Array.from(arrayLike, mapFn, thisArg)
+  indexOf(searchElement)
+  indexOf(searchElement, fromIndex)
 */
-console.log(Array.from('foo'));
-// Expected output: Array ["f", "o", "o"]
+const array = [2, 9, 9];
+console.log(array.indexOf(2));  // 0
+console.log(array.indexOf(100));  // -1
+console.log(array.indexOf(9, 2));  // 2
+console.log(array.indexOf(2, -1));  // -1 （-1番目（2つ目の9から検索開始で、それ以降に2がないから-1）
 
-console.log(Array.from([1, 2, 3], (x) => x * 2));
-// Expected output: Array [2, 4, 6]
+// ある要素の存在をすべて見つける
+const indices = [];
+const array2 = ["a", "b", "a", "c", "a", "d"];
+const element = "a";
+let idx = array2.indexOf(element);
+while (idx !== -1) {
+  indices.push(idx);
+  idx = array2.indexOf(element, idx + 1);
+}
+console.log(indices);
+// [0, 2, 4]
