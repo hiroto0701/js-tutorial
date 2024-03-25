@@ -302,20 +302,50 @@
   indexOf(searchElement)
   indexOf(searchElement, fromIndex)
 */
-const array = [2, 9, 9];
-console.log(array.indexOf(2));  // 0
-console.log(array.indexOf(100));  // -1
-console.log(array.indexOf(9, 2));  // 2
-console.log(array.indexOf(2, -1));  // -1 （-1番目（2つ目の9から検索開始で、それ以降に2がないから-1）
+// const array = [2, 9, 9];
+// console.log(array.indexOf(2));  // 0
+// console.log(array.indexOf(100));  // -1
+// console.log(array.indexOf(9, 2));  // 2
+// console.log(array.indexOf(2, -1));  // -1 （-1番目（2つ目の9から検索開始で、それ以降に2がないから-1）
 
-// ある要素の存在をすべて見つける
-const indices = [];
-const array2 = ["a", "b", "a", "c", "a", "d"];
-const element = "a";
-let idx = array2.indexOf(element);
-while (idx !== -1) {
-  indices.push(idx);
-  idx = array2.indexOf(element, idx + 1);
-}
-console.log(indices);
-// [0, 2, 4]
+// // ある要素の存在をすべて見つける
+// const indices = [];
+// const array2 = ["a", "b", "a", "c", "a", "d"];
+// const element = "a";
+// let idx = array2.indexOf(element);
+// while (idx !== -1) {
+//   indices.push(idx);
+//   idx = array2.indexOf(element, idx + 1);
+// }
+// console.log(indices);
+// // [0, 2, 4]
+
+
+/* Array.prototype.isArray() 非破壊メソッド */
+// Array.isArray() 静的メソッドは、渡された値が Array かどうかを判断します。
+/*
+  syntax
+  Array.isArray(value)
+*/
+// 以下の呼び出しはすべて true を返します
+Array.isArray([]);
+Array.isArray([1]);
+Array.isArray(new Array());
+Array.isArray(new Array("a", "b", "c", "d"));
+Array.isArray(new Array(3));
+// あまり知られていないものの Array.prototype は配列です
+Array.isArray(Array.prototype);
+
+// 以下の呼び出しはすべて false を返します
+Array.isArray();
+Array.isArray({});
+Array.isArray(null);
+Array.isArray(undefined);
+Array.isArray(17);
+Array.isArray("Array");
+Array.isArray(true);
+Array.isArray(false);
+Array.isArray(new Uint8Array(32));
+// これは配列ではありません。配列リテラルを使用した構文でも、
+// Array コンストラクターでもないからです。
+Array.isArray({ __proto__: Array.prototype });
