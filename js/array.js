@@ -280,3 +280,16 @@
 // // Setから配列の生成
 // const set = new Set(["foo", "bar", "baz", "foo"]);
 // console.log(Array.from(set)); // [ 'foo', 'bar', 'baz' ]
+
+
+/* Array.prototype.includes() 非破壊メソッド */
+// includes() は Array インスタンスのメソッドで、特定の要素が配列に含まれているかどうかを true または false で返します。
+ /*
+  syntax
+  includes(searchElement)
+  includes(searchElement, fromIndex)
+*/
+console.log([1 , 2, 3].includes(2));  // true
+console.log([1 , 2, 3].includes(4));  // false
+console.log([1 , 2, "3"].includes(3));  // false
+console.log([1 , 2, 3, 4, 5, 6].includes(3, 4));  // false（検索開始位置がインデックス番号4の要素からだから）
