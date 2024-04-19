@@ -35,9 +35,9 @@
 
 function sampleResolve(value) {
   return new Promise(resolve => {
-      setTimeout(() => {
-          resolve(value);
-      }, 1000);
+    setTimeout(() => {
+      resolve(value);
+    }, 1000);
   })
 }
 
@@ -82,9 +82,9 @@ function fetchData() {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (Math.random() > 0.5) {
-          resolve("データ取得成功！");
+        resolve("データ取得成功！");
       } else {
-          reject("エラーが発生しました。");
+        reject("エラーが発生しました。");
       }
     }, 1000);
   });
@@ -126,3 +126,54 @@ async function multiFetchData() {
   console.log(result1 + result2);
 }
 multiFetchData();
+
+
+
+// もっと理解したい！
+// ・コールバック地獄を体験する。
+// API1: リクエストを送り、結果を受け取る
+// API2: API1の結果を使ってリクエストを送り、結果を受け取る
+// API3: API2の結果を使ってリクエストを送り、結果を受け取る
+// API1. 非同期でAPIにリクエストを送って値を取得する処理
+function request1(callback) {
+  setTimeout(() => {
+    // 1 は適当な例、なんでもいいです
+    callback(1);
+  }, 1000);
+}
+ 
+// API2. 受け取った値を別のAPIにリクエストを送って値を取得する処理
+function request2(result1, callback) {
+  setTimeout(() => {
+    callback(result1 + 1);
+  }, 1000);
+}
+ 
+// API3. 受け取った値を別のAPIにリクエストを送って値を取得する処理
+function request3(result2, callback) {
+  setTimeout(() => {
+    callback(result2 + 2);
+  }, 1000);
+}
+
+request1((result1) => {
+  request2(result1, (result2) => {
+    request3(result2, (result3) => {
+      console.log("結果は" + result3)
+      // 3秒後に4が表示される。
+    });
+  });
+});
+
+
+// Promise
+// const promise = new Promise((resolve, reject) => {});
+// console.table(promise);
+
+const promise = new Promise((resolve) => {
+  resolve();
+}).then(() => {
+  console.log('resolveしました');
+})
+
+console.log(promise)
